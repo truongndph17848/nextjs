@@ -1,33 +1,31 @@
 import React from 'react'
 import { useForm } from 'react-hook-form';
-
 import useProducts from '../../hooks/use-product';
-
-
 
 type ProductsProps = {
     products: any[];
   }
 
-const creatProducts = ({products}: ProductsProps) => {
+const editProducts = ({products}: ProductsProps) => {
 
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    const { data, error, create } = useProducts();
-    if (error) return <div>failed to load</div>;
-    // if (!data) return <div>loading...</div>;
+        // eslint-disable-next-line react-hooks/rules-of-hooks
+        const { data, error, create } = useProducts();
+        if (error) return <div>failed to load</div>;
+        // if (!data) return <div>loading...</div>;
+    
+        const { register, handleSubmit, formState: { errors } } = useForm();
+    
+    
+        const onhandleSubmit = (data: any) =>{
+            console.log(data);
+            create(data);
+    
+            // create({...data, products});
+        }
 
-    const { register, handleSubmit, formState: { errors } } = useForm();
-
-
-    const onhandleSubmit = (data: any) =>{
-        console.log(data);
-        create(data);
-
-        // create({...data, products});
-    }
-    return (
-        <div>
-            <h2>them sp</h2>
+  return (
+            <div>
+            <h2>edit sp</h2>
             <hr />
             <hr />
             <hr />
@@ -46,9 +44,7 @@ const creatProducts = ({products}: ProductsProps) => {
         </form>
 
         </div>
-  
-    );
-  
+  )
 }
 
-export default creatProducts
+export default editProducts
